@@ -27,5 +27,3 @@ player
         break;
     }
   });
-
-player.on('play', onPlay);
