@@ -7,12 +7,12 @@ const player = new Player(iframe);
 const onPlay = function (data) {
   localStorage.setItem('videoplayer-current-time', data.seconds);
 };
-player.on('timeupdate', throttle(onPlay, 500));
+player.on('timeupdate', throttle(onPlay, 1000));
 
 const currentTime = Number(localStorage.getItem('videoplayer-current-time'));
 
 player
-  .setCurrentTime(30.456)
+  .setCurrentTime(currentTime)
   .then(function (seconds) {
     // seconds = the actual time that the player seeked to
   })
