@@ -12,9 +12,9 @@ const refs = {
 refs.form.addEventListener('submit', onFormSubmit);
 refs.textarea.addEventListener('input', throttle(onTextareaInput, 500));
 
-// refs.form.addEventListener('input', event => {
-//   formData[event.target.name] = event.target.value;
-// });
+refs.form.addEventListener('input', event => {
+  formData[event.target.name] = event.target.value;
+});
 
 populateTextarea();
 
