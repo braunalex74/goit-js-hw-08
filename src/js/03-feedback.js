@@ -34,6 +34,20 @@ function onFormSubmit(event) {
 
   event.currentTarget.reset();
   formData = {};
+
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  if (email.trim() === '') {
+    alert('Будь ласка, введіть свою електронну адресу.');
+    return false;
+  } else if (!isValidEmail(email)) {
+    alert('Будь ласка, введіть дійсну адресу електронної пошти.');
+    return false;
+  }
+  return true;
 }
 
 function populateForm() {
