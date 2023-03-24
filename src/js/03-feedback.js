@@ -22,11 +22,29 @@ function onTextareaInput(event) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
+function validateEmail(email) {
+  const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return re.test(email);
+}
+
 function onFormSubmit(event) {
   event.preventDefault();
 
   const { email, message } = event.currentTarget.elements;
-  console.log({ email: email.value.trim(), message: message.value.trim() });
+  const trimmedEmail = email.value.trim();
+  const trimmedMessage = message.value.trim();
+
+  if (!validateEmail(trimmedEmail)) {
+    alert('Будь ласка, введіть дійсну адресу електронної пошти');
+    return;
+  }
+
+  if (trimmedMessage.length < 10) {
+    alert('Будь ласка, введіть повідомлення довжиною не менше 10 символів');
+    return;
+  }
+
+  console.log({ email: trimmedEmail, message: trimmedMessage });
 
   if (localStorage.getItem(STORAGE_KEY)) {
     localStorage.removeItem(STORAGE_KEY);
@@ -34,20 +52,6 @@ function onFormSubmit(event) {
 
   event.currentTarget.reset();
   formData = {};
-
-  function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-
-  if (email.trim() === '') {
-    alert('Будь ласка, введіть свою електронну адресу.');
-    return false;
-  } else if (!isValidEmail(email)) {
-    alert('Будь ласка, введіть дійсну адресу електронної пошти.');
-    return false;
-  }
-  return true;
 }
 
 function populateForm() {
